@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Happy Times</title>
+    </head>
+    <body>
+        <!-- 1 Sección para mostrar los productos-->
+        <section th:fragment="listadoProductos">
+            <div class="row row-cols-4">
+                <div class="card p-2" th:each="d : ${descuentos}">
+                    <figure>
+                        <<img th:src="${d.rutaImagen}"
+                              height="200" 
+                              alt="alt"/>
+                        <figcaption>
+                            ₡[[${d.precio}]] ([[${d.existencias}]])
+                        </figcaption>
+                    </figure>
+                    <div class="card-header">
+                        <h4>[[${d.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">[[${d.detalle}]]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="tabsCategorias">
+            <div class="row py-4">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="/descuento/listado">[[#{pruebas.todas}]]</a>
+                    </li>
+                    <li class="nav-item" th:each = "c : ${categorias}">
+                        <a class="nav-link"
+                           th:href="@{/descuento/listado/}+${c.idCategoria}">[[${c.descripcion}]]</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </body>
+</html>
+
