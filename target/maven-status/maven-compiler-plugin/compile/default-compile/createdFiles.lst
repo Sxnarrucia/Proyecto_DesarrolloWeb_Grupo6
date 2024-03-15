@@ -13,6 +13,7 @@ com\proyecto\service\CategoriaService.class
 com\proyecto\dao\ProductoDao.class
 com\proyecto\dao\DescuentoDao.class
 com\proyecto\ProjectConfig.class
+com\proyecto\controller\PruebasController.class
 com\proyecto\domain\Descuento.class
 com\proyecto\service\ProductoServiceImpl.class
 com\proyecto\service\ProductoService.class
