@@ -50,6 +50,15 @@ create table happy_times.descuento (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+create table happy_times.favorito (
+  id_favorito INT NOT NULL AUTO_INCREMENT,
+  id_producto INT NOT NULL,
+  PRIMARY KEY (id_favorito),
+  foreign key fk_favorito_producto (id_producto) references producto(id_producto)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 /*Se insertan 3 categorias de productos como ejemplo */
 INSERT INTO happy_times.categoria (id_categoria,descripcion,ruta_imagen,activo) VALUES 
 ('1','Tarjetas', 'https://plugins-media.makeupar.com/smb/blog/post/2022-09-28/6d8981f1-8466-4f16-9063-68593cc384b9.jpg',   true), 
