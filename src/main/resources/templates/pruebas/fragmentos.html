@@ -27,11 +27,100 @@
                     <div class="container">
                         <div class="row">
                             <div>   
-                                <button class="btn btn-primary" >
-                                    <a th:href="@{/registro/nuevo}" 
+                                <button class="bg-info" >
+                                    <a th:href="@{/pruebas/listado}" 
                                        class="btn"><i class="fa-plus"></i> Agregar Favorito</a></button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="bg-info btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarProducto">
+                            <i class="fas fa-plus"></i> Personalice su regalo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="agregarProducto">
+            <div id="agregarProducto" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light text-black">
+                            <h5 class="modal-title">Regalo Personalizado</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:href="@{/pruebas/listado}" th:object="${producto}"
+                              class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="categoria">Categoría</label>
+                                    <select class="form-select" name="categoria.idCategoria">
+                                        <option th:each="c : ${categorias}"
+                                                th:value="${c.idCategoria}"
+                                                th:text="${c.descripcion}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="exampleFormControlSelect1">Color Envoltorio</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>Rojo</option>
+                                        <option>Azul</option>
+                                        <option>Verde</option>
+                                        <option>Rosado</option>
+                                        <option>Mixto</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="exampleFormControlSelect1">Color Lazo</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>Rojo</option>
+                                        <option>Azul</option>
+                                        <option>Mixto</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="detalle">Mensaje personalizado</label>
+                                    <textArea class="form-control" name="detalle" rows="3"/></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Agregar al carrito</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="listadoProductosIndex">
+            <div class="row row-cols-4">
+                <div class="card p-2" th:each="p : ${productos}">
+                    <figure>
+                        <<img th:src="${p.rutaImagen}" 
+                              height="200" 
+                              alt="alt"/>
+                        <figcaption>
+                            ₡[[${p.precio}]] ([[${p.existencias}]])
+                        </figcaption>
+                    </figure>
+                    <div clas="card-header">
+                        <h4>[[${p.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">[[${p.detalle}]]</p>
                     </div>
                 </div>
             </div>
