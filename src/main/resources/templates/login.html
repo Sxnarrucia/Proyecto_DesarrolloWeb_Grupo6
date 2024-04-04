@@ -3,18 +3,19 @@
       xmlns:th="http://www.thymeleaf.org"
       >
     <head th:replace="~{layout/plantilla :: head}">
-        <title>Happy Times</title>
+        <title>Happy_times</title>
         <meta charset="UTF-8"/>
 
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
 
-        <section th:replace="~{pruebas/fragmentos :: botonesAgregar}"/>
-        <section th:replace="~{pruebas/fragmentos :: agregarProducto}"/>
-        <section th:replace="~{pruebas/fragmentos :: tabsCategorias}"/>
-        <section th:replace="~{pruebas/fragmentos :: listadoProductos}"/>
-
+        <div class="row p-5">
+            <form method="post"
+                  th:action="@{/login}">
+                sASasASDas
+            </form>
+        </div>
 
         <footer th:replace="~{layout/plantilla :: footer}"/>
     </body>
