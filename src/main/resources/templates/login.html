@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org"
       >
     <head th:replace="~{layout/plantilla :: head}">
@@ -13,10 +14,30 @@
         <div class="row p-5">
             <form method="post"
                   th:action="@{/login}">
-                sASasASDas
+                <div class="row my-3 form-group">
+                    <label class="col-md-5" for='username'>
+                        <i class="fas fa-user-lock"></i> [[#{login.username}]]
+                    </label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="text" name="username"/>
+                    </div>
+                </div>
+
+                <div class="row my-3 form-group">
+                    <label class="col-md-5" for='password'>
+                        <i class="fas fa-user-lock"></i> [[#{login.password}]]
+                    </label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="password" name="password"/>
+                    </div>
+                </div>
+
+                <input type="submit" value="login"/>
+
             </form>
         </div>
 
         <footer th:replace="~{layout/plantilla :: footer}"/>
     </body>
 </html>
+
