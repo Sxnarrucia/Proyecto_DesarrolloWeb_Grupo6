@@ -5,8 +5,8 @@
 package com.proyecto.service;
 
 import com.proyecto.dao.UsuarioDao;
+import com.proyecto.domain.Rol;
 import com.proyecto.domain.Usuario;
-import com.proyecto.service.UsuarioDetailsService;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,21 +33,33 @@ public class UsuarioDetailsServiceImpl implements UsuarioDetailsService, UserDet
     private HttpSession session;
 
     @Override
-    @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String username) 
-            throws UsernameNotFoundException {
-        //Busca un usuario en la tabla de usuarios
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //se busca el username
         Usuario usuario = usuarioDao.findByUsername(username);
         
-        //Se valida si se recupero un usuario
-        if (usuario==null) { //No se encontro
-           throw new  UsernameNotFoundException(username);
+        //se valida el usuario
+        if (usuario == null) {
+            throw new UsernameNotFoundException(username);
         }
-        session.removeAttribute("imagenUsuario");
-        session.setAttribute("imagenUsuario", usuario.getRutaImagen());
         
-        //Si estamos aca, se encontro el usuario
-        return null;
+        //guardar imagen en una sesion
+        session.removeAttribute("usuarioImagen");
+        session.setAttribute("usuarioImagen", usuario.getRutaImagen());
+        
+        //Se encuentra usuario
+        //cargamos roles para que sean Roles del sistema
+        var roles = new ArrayList<GrantedAuthority>();
+        
+        //itera sobre roles
+        for (Rol r : usuario.getRoles()) {
+            roles.add(new SimpleGrantedAuthority(r.getNombre()));
+        }
+        
+        //se retorna usuario
+        return new User(usuario.getUsername(),
+        usuario.getPassword(),
+        roles);
     }
 
 }

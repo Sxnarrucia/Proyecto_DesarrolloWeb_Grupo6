@@ -59,6 +59,31 @@ create table happy_times.favorito (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+/*Se crea la tabla de clientes llamada cliente... igual que la clase Cliente */
+CREATE TABLE happy_times.usuario (
+  id_usuario INT NOT NULL AUTO_INCREMENT,
+  username varchar(20) NOT NULL,
+  password varchar(512) NOT NULL,
+  nombre VARCHAR(20) NOT NULL,
+  apellidos VARCHAR(30) NOT NULL,
+  correo VARCHAR(50) NULL,
+  telefono VARCHAR(15) NULL,
+  ruta_imagen varchar(1024),
+  activo boolean,
+  PRIMARY KEY (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+create table happy_times.rol (
+  id_rol INT NOT NULL AUTO_INCREMENT,
+  nombre varchar(20),
+  id_usuario int,
+  PRIMARY KEY (id_rol),
+  foreign key fk_rol_usuario (id_usuario) references usuario(id_usuario)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 /*Se insertan 3 categorias de productos como ejemplo */
 INSERT INTO happy_times.categoria (id_categoria,descripcion,ruta_imagen,activo) VALUES 
 ('1','Tarjetas', 'https://plugins-media.makeupar.com/smb/blog/post/2022-09-28/6d8981f1-8466-4f16-9063-68593cc384b9.jpg',   true), 
@@ -91,7 +116,13 @@ INSERT INTO happy_times.descuento (id_descuento,id_categoria,descripcion,detalle
 (12,3,'Caja Corazón','Risus tristique donec faucibus cursus dictumst vestibulum maecenas.',20000,3,'https://ecobrisamanualidades.com/wp-content/uploads/2022/01/caja-corazon-1024x688.jpg',true),
 (13,4,'Globo Elefante','El "Globo Elefante" es una encantadora pieza decorativa que añade un toque lúdico y tierno a cualquier celebración. Con forma de elefante y colores vibrantes, este globo es perfecto para decorar fiestas de cumpleaños, baby showers o cualquier ocasión especial. Su diseño adorable y su tamaño llamativo lo convierten en un elemento decorativo que seguramente capturará la atención y alegrará a los invitados de todas las edades. ¡Celebra de manera divertida y original con un Globo Elefante!',14000,0,'https://globofiesta.com/wp-content/uploads/2019/10/elefant1.jpg',true);
 
+/*Se insertan 3 registros en la tabla cliente como ejemplo */
 INSERT INTO happy_times.usuario (id_usuario, username,password,nombre, apellidos, correo, telefono,ruta_imagen,activo) VALUES 
-(1,'Roberto','123','Roberto', 'Vargas Rodriguez',    'rvargas70307@ufide.ac.cr',    '4556-8978', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true),
-(2,'Esteban','456','Esteban',  'Sanrrucia Molina', 'esanarrucia10062@ufide.ac.cr', '5456-8789','https://upload.wikimedia.org/wikipedia/commons/0/06/Photo_of_Rebeca_Arthur.jpg',true),
-(3,'Wilberth','246','Wilberth', 'Molina Perez',     'wmolina40169@ufide.ac.cr',      '7898-8936','https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Eduardo_de_Pedro_2019.jpg/480px-Eduardo_de_Pedro_2019.jpg?20200109230854',true);
+(1,'Esteban','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Juan', 'Castro Mora',    'jcastro@gmail.com',    '4556-8978', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true),
+(2,'Roberto','$2a$10$GkEj.ZzmQa/aEfDmtLIh3udIH5fMphx/35d0EYeqZL5uzgCJ0lQRi','Rebeca',  'Contreras Mora', 'acontreras@gmail.com', '5456-8789','https://upload.wikimedia.org/wikipedia/commons/0/06/Photo_of_Rebeca_Arthur.jpg',true),
+(3,'Wilberth','$2a$10$koGR7eS22Pv5KdaVJKDcge04ZB53iMiw76.UjHPY.XyVYlYqXnPbO','Pedro', 'Mena Loria',     'lmena@gmail.com',      '7898-8936','https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Eduardo_de_Pedro_2019.jpg/480px-Eduardo_de_Pedro_2019.jpg?20200109230854',true);
+
+insert into happy_times.rol (id_rol, nombre, id_usuario) values
+ (1,'ROLE_USER',1),
+ (2,'ROLE_USER',2),
+ (3,'ROLE_USER',3);
