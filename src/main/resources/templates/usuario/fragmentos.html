@@ -15,8 +15,12 @@
                                 <div class="row">
                                     <img th:src='@{${session.usuarioImagen}}' class="img-responsive" />
                                 </div>
-                                <div class="p-2">
-                                    <button class="btn btn-danger">xxx</button>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form th:action="@{/usuario/eliminar}" method="post">
+                                            <button type="submit" class="btn btn-danger">Eliminar mi cuenta</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -36,6 +40,7 @@
                 </div>
             </div>
         </section>
+
 
     </body>
 </html>
