@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Happy Times</title>
+    </head>
+    <body>
+        <section th:fragment="listadoPerfil">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="profile-head col-xs-8 col-xs-push-2 col-sm-10 col-sm-push-1 thumbnail">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="row">
+                                    <img th:src='@{${session.usuarioImagen}}' class="img-responsive" />
+                                </div>
+                                <div class="p-2">
+                                    <button class="btn btn-danger">xxx</button>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <h2><span th:text="${usuario.nombre}"></span> <span th:text="${usuario.apellidos}"></span></h2>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <ul>
+                                            <li> Teléfono: <span th:text="${usuario.telefono}"></span></li>
+                                            <li> Correo: <span th:text="${usuario.correo}"></span></li>
+                                            <li> Nombre de Usuario: <span th:text="${usuario.username}"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

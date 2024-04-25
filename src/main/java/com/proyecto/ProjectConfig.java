@@ -51,14 +51,14 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/carrito/**", "/js/**", "/webjars/**","/registro/**")
+                .requestMatchers("/", "/index", "/carrito/**", "/js/**", "/webjars/**","/registro/**", "/favorito/**","/usuario/**")
                 .permitAll()
-                .requestMatchers("/categoria/listado", "/producto/listado")
+                .requestMatchers("/categoria/listado", "/producto/listado", "/favorito/**", "/js/**", "/webjars/**")
                 .hasRole("USER")
                 .requestMatchers("/categoria/nuevo", "/categoria/modificar/**", "/categoria/eliminar/**", "/categoria/guardar/**",
-                        "/producto/nuevo", "/producto/modificar/**", "/producto/eliminar/**", "/producto/guardar/**", "/pruebas/**", "/js/**")
+                        "/producto/nuevo", "/producto/modificar/**", "/producto/eliminar/**", "/producto/guardar/**", "/pruebas/**", "/js/**", "/favorito/**", "/js/**", "/webjars/**")
                 .hasRole("USER")
-                .requestMatchers("/facturar/carrito", "/favorito/**", "/js/**", "/descuento/**")
+                .requestMatchers("/facturar/carrito", "/favorito/**", "/js/**", "/descuento/**", "/js/**", "/webjars/**")
                 .hasRole("USER"))
                 .formLogin((form) -> form.loginPage("/login").permitAll())
                 .logout((logout) -> logout.permitAll());
