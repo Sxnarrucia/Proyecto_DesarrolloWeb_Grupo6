@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org"
       >
-    <head th:fragment="head">
+    <head th:fragment="head">  
         <title>Happy Times</title>
         <meta charset="UTF-8"/>
         <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
@@ -25,44 +25,44 @@
                         <li class="nav-item active">
                             <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="hasRole('USER')">
                             <a class="nav-link" th:href="@{/pruebas/listado}">Productos</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="hasRole('USER')">
                             <a class="nav-link" th:href="@{/descuento/listado}">Descuentos</a>
                         </li>
-                    </ul>
-                    <ul  class="navbar-nav" sec:authorize='isAuthenticated()'>
-                        <li class="nav-item px-2 text-black">
-                            <a 
-                                class='nav-link'
-                                th:href='@{/login}'>
-                                <i class='fas fa-sing-in-alt'></i>
-                            </a>
+                        <li class="nav-item" sec:authorize="hasRole('USER')">
+                            <a class="nav-link" th:href="@{/favorito/listado}">Favoritos</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasRole('USER')">
+                            <a class="nav-link" th:href="@{/usuario/perfil}">Perfil</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav" sec:authorize='!isAuthenticated()'>
+                        <li class="nav-item px-2 text-white">
+                            <a class="nav-link"
+                               th:href='@{/login}'>
+                                <i class="fas fa-sign-in-alt"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav" sec:authorize='isAuthenticated()'>
                         <li class="nav-item text-black my-auto">
-                            <img
-                                th:src='@{${session.usuarioImagen}}'
-                                alt='user'
-                                height="40"
-                                class='rounded-circle'
-                                />
+                            <img th:src='@{${session.usuarioImagen}}'
+                                 alt='user'
+                                 height="40"
+                                 class="rounded-circle"/>
                             <span sec:authentication='name'>xxx</span>
                         </li>
                         <li class="nav-item text-black my-auto">
                             <form method="post"
                                   th:action='@{/logout}'>
-                              <button class='btn btn-dark'>
-                               <i class='fas fa-sign-out-alt'></i>    
-                               </button>  
-                            </form> 
-                            
+                                <button class="btn btn-dark">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
+                            </form>
                         </li>
                     </ul>
-                    
-                    
                 </div>
             </nav>
             <section id="main-header" class="py-2 bg-info text-black">
